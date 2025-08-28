@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>title</title>
 </head>
+
 <body>
     <h1>Book of Mormom Baseball!!!</h1>
     <div id="verses"></div>
-    <script src="BOMB.js"></script>
+
+    <div id="guess-section">
+        <label for="bookSelect">Book:</label>
+        <select id="bookSelect"></select>
+
+        <label for="chapterSelect">Chapter:</label>
+        <select id="chapterSelect"></select>
+
+        <button id="finalizeGuess" disabled="true">Guess</button>
+    </div>
+
+    <div id="result" aria-live="polite"></div>
+
     <button id="revealReference" disabled>Reveal Reference</button>
+    <button id="newRound">New Round</button>
+
     <div id="reference" aria-live="polite"></div>
+
+    <script src="BOMB.js"></script>
 </body>
+
 </html>
