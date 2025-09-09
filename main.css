@@ -1,0 +1,72 @@
+.runner {
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    transition: left var(--runner-animation-time) ease, top var(--runner-animation-time) ease;
+    z-index: 1;
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 20px;
+}
+
+#diamond {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    background: #7cf786;
+}
+
+.base {
+    width: 40px;
+    height: 40px;
+    background: #ffcf88;
+    border: 2px solid #000;
+    position: absolute;
+    transform: rotate(45deg);
+    z-index: 0;
+}
+
+#scoreboard {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#scoreboard h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+#container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+#left-panel, #right-panel {
+    flex: 1; /* Each side takes equal space on screen */
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#left-panel {
+    background: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#right-panel {
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
