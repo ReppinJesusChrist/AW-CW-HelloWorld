@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputFile = path.join(__dirname, "../data/bom_only.json");
-const outputFile = path.join(__dirname, "../data/bom.json");
+const inputFile = path.join(__dirname, "../data/oldtest_only.json");
+const outputFile = path.join(__dirname, "../data/o_test.json");
 
 try{
     const raw = fs.readFileSync(inputFile, 'utf8');

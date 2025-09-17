@@ -5,43 +5,59 @@
     <meta charset="UTF-8" />
     <title>title</title>
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="buttons.css" />
 </head>
 
 <body>
-    <h1>Book of Mormon Baseball!!!</h1>
-    <div id="container">
-        <div id="left-panel">
-            <div id="instructions"></div>
-            <div id="verses"></div>
-
-            <div id="guess-section">
-                <div id="timer-container">
-                    <div id="timer-bar"></div>
-                </div>
-                
-                <label for="bookSelect">Book:</label>
-                <select id="bookSelect"></select>
-
-                <label for="chapterSelect">Chapter:</label>
-                <select id="chapterSelect"></select>
-
-                <button id="finalizeGuess" disabled="true">Guess</button>
-            </div>
-
-            <div id="result" aria-live="polite"></div>
-
-            <button id="revealDistance" disabled>Reveal Distance</button>
-            <button id="revealReference" disabled>Reveal Reference</button>
-            <button id="newRound">New Round</button>
-
-            <div id="distance" aria-live="polite"></div>
-            <div id="reference" aria-live="polite"></div>
-
-            <div id = "scoreboard">
-                <h2 id="roundDisplay">Round: <span id="round">__</span></h2>
-                <h2 id="scoreDisplay">Score: <span id="score">__</span></h2>
-            </div>
+    <div id="menu-screen">
+        <h1>Book of Mormon Baseball!!!</h1>
+        <button class="start-restart-button" id="start-button">Start Game</button>
+        <div id="difficulty-selection">
+            <label for="difficulty-dropdown-label">Select Difficulty:</label>
+            <select id="difficulty-value">
+                <option value="easy">Easy (30s)</option>
+                <option value="medium">Medium (20s)</option>
+                <option value="hard">Hard (10s)</option>
+            </select>
         </div>
+    </div>
+    <div id="game-screen" style="display:none;">
+        <h1>Book of Mormon Baseball!!!</h1>
+        <div id="container">
+            <div id="left-panel">
+                <div id="instructions"></div>
+                <div id="verses"></div>
+
+                <div id="timer-container">
+                    <div id="timer-bar"></div>    
+                </div>
+                <div id="guess-section">               
+                    <label for="bookSelect">Book:</label>
+                    <select id="bookSelect"></select>
+
+                    <label for="chapterSelect">Chapter:</label>
+                    <select id="chapterSelect"></select>
+
+                    <button id="finalizeGuess" disabled="true">Guess</button>
+                </div>
+
+                <div id="result" aria-live="polite"></div>
+
+                <button id="revealDistance" disabled>Reveal Distance</button>
+                <button id="revealReference" disabled>Reveal Reference</button>
+                <button id="newRound">New Round</button>
+
+                <div id="distance" aria-live="polite"></div>
+                <div id="reference" aria-live="polite"></div>
+
+                <div id = "scoreboard">
+                    <h2 id="roundDisplay">Round: <span id="round">__</span></h2>
+                    <h2 id="scoreDisplay">Score: <span id="score">__</span></h2>
+                    <div id="strikes-display">Strikes: <span id="strikes">__</span></div>
+                </div>
+                <button class="start-restart-button" id="restart-button">Restart Game</button>
+                <button id="main-menu-button">Main Menu</button>
+            </div>
         <div id="right-panel">
           <div id="diamond">
             <div class="base" id="home"></div>
@@ -51,9 +67,15 @@
           </div>
         </div>
     </div>
+    </div>
+    <div id="game-over-screen" style="display:none;">
+        <h2>Game Over</h2>
+        <p>Your final score is: <span id="final-score">__</span></p>
+        <button class="start-restart-button" id="try-again-button">Restart Game</button>
+    </div>
     
 
-    <script src="BOMB.js"></script>
+    <script type="module" src="BOMB.js"></script>
 </body>
 
 </html>

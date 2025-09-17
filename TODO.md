@@ -1,0 +1,16 @@
+# TODO
+- [ ] Delay between strike 3 and game over screen
+- [ ] Big red X boxes for strikes
+- [ ] Display strike count immediately after a strike instead of waiting for next round
+- [ ] Make buttons bigger and prettier
+- [X] Implement time selection on main page
+- [ ] Make the countdown bar fancier
+  - [ ] Change color toward red as it counts down
+  - [ ] Flash for urgent ending
+- [ ] Allow book exclusion
+- [ ] Other Books 
+  - [ ] Selection Menu
+  - [ ] GenCon
+- [ ] Show score on Game Over screen
+- [X] Disable timer with Main Menu button
+- [X] Insert hyperlink on reference reveal to allow going to churchofjesuschrist.org to view the chapter and see context
