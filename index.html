@@ -6,6 +6,7 @@
     <title>title</title>
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="buttons.css" />
+    <link rel="stylesheet" href="right_column.css" />
 </head>
 
 <body>
@@ -31,7 +32,7 @@
                 <div id="timer-container">
                     <div id="timer-bar"></div>    
                 </div>
-                <div id="guess-section">               
+                <div class="controls" id="guess-section">               
                     <label for="bookSelect">Book:</label>
                     <select id="bookSelect"></select>
 
@@ -42,10 +43,12 @@
                 </div>
 
                 <div id="result" aria-live="polite"></div>
-
-                <button id="revealDistance" disabled>Reveal Distance</button>
-                <button id="revealReference" disabled>Reveal Reference</button>
-                <button id="newRound">New Round</button>
+                <div class="controls">
+                    <button id="revealDistance" disabled>Reveal Distance</button>
+                    <button id="revealReference" disabled>Reveal Reference</button>
+                    <button id="newRound">New Round</button>
+                </div>
+                
 
                 <div id="distance" aria-live="polite"></div>
                 <div id="reference" aria-live="polite"></div>
@@ -64,6 +67,11 @@
             <div class="base" id="first"></div>
             <div class="base" id="second"></div>
             <div class="base" id="third"></div>
+          </div>
+          <div id="strike-boxes">
+            <div class="strike-box" id="strike-box-1"></div>
+            <div class="strike-box" id="strike-box-2"></div>
+            <div class="strike-box" id="strike-box-3"></div>
           </div>
         </div>
     </div>

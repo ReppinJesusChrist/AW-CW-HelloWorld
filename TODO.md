@@ -1,16 +1,26 @@
 # TODO
-- [ ] Delay between strike 3 and game over screen
-- [ ] Big red X boxes for strikes
-- [ ] Display strike count immediately after a strike instead of waiting for next round
-- [ ] Make buttons bigger and prettier
+- [X] Delay between strike 3 and game over screen
+- [X] Big red X boxes for strikes
+- [X] Display strike count immediately after a strike instead of waiting for next round
+- [X] Make buttons bigger and prettier
 - [X] Implement time selection on main page
-- [ ] Make the countdown bar fancier
-  - [ ] Change color toward red as it counts down
-  - [ ] Flash for urgent ending
+- [X] Make the countdown bar fancier
+  - [X] Change color toward red as it counts down
+  - [X] Flash for urgent ending
 - [ ] Allow book exclusion
 - [ ] Other Books 
   - [ ] Selection Menu
   - [ ] GenCon
-- [ ] Show score on Game Over screen
+- [X] Show score on Game Over screen
+- [ ] Make main menu cleaner and bigger
+- [ ] Same ^^^ with Game Over screen
 - [X] Disable timer with Main Menu button
 - [X] Insert hyperlink on reference reveal to allow going to churchofjesuschrist.org to view the chapter and see context
+- [ ] Match reveal text ( [ ] & Other status text) to button text size
+- [ ] Use faces of prophets as players (Is this legal?)
+- [X] Fix "Strikes: text" bug
+- [ ] Add Main Menu button to game over screen
+- [ ] Implement a leaderboard
+- [ ] Flash text on screen (not an alert) when a strike is hit ("Strike 1!" etc.)
+- [ ] Sort the functions in BOMB.js to make it easier to seek through. Maybe refactor out some other .js files
+- [ ] Add BOM styling to all elements (Background texture & color, gold letters, font, etc.)

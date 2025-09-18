@@ -1,0 +1,37 @@
+#diamond {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    background: #7cf786;
+}
+
+.base {
+    width: 40px;
+    height: 40px;
+    background: #ffcf88;
+    border: 2px solid #000;
+    position: absolute;
+    transform: rotate(45deg);
+    z-index: 0;
+}
+
+#strike-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;              /* Space between boxes */
+    margin-top: 20px;
+}
+
+.strike-box {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    font-weight: bold;
+    color: red;
+}

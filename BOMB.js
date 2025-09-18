@@ -24,7 +24,7 @@ const GAME_STATES = {
 }
 
 import { startTimer, stopTimer } from "./timer.js";
-import { makeScriptureLink } from "./helper_functions.js";
+import { makeScriptureLink, sleep } from "./helper_functions.js";
 
 let scriptures = null;
 let currentSelection = null;
@@ -300,6 +300,7 @@ function updateScoreboard() {
   document.getElementById("score").textContent = `${score}`;
   document.getElementById("round").textContent = `${round}`;
   document.getElementById("strikes").textContent = `Strikes: ${strikes}`;
+  updateStrikeBoxes();
 }
 
 function setRunnerPosition(runner, base){
@@ -358,14 +359,14 @@ function submitGuess() {
     if (distance <= HOME_RUN_THRESHOLD){
       resultEl.textContent = `HOME RUN!!! (Within ${HOME_RUN_THRESHOLD} chapters).`;
     } else if(distance <= TRIPLE_THRESHOLD){
-      resultEl.textContent = `TRIPLE!. (Within ${TRIPLE_THRESHOLD} chapters).`;
+      resultEl.textContent = `TRIPLE! (Within ${TRIPLE_THRESHOLD} chapters).`;
     } else if(distance <= DOUBLE_THRESHOLD){
       resultEl.textContent = `Double! (Within ${DOUBLE_THRESHOLD} chapters). `;
     } else if(distance <= SINGLE_THRESHOLD){
       resultEl.textContent = `Single! (Within ${SINGLE_THRESHOLD} chapters). `;
     } else {
       resultEl.textContent = `STRIKE! (Off by at least ${SINGLE_THRESHOLD + 1} chapters). `;
-      handleStrike();
+      addStrike();
     }
 
     document.getElementById('finalizeGuess').disabled = true;
@@ -379,7 +380,8 @@ function startRound(){
 }
 
 function handleTimeUp() {
-  alert("Time's Up!");
+  addStrike();
+  console.log("Time's Up! That's strike #" + strikes);
 }
 
 function showScreen(state){
@@ -389,11 +391,19 @@ function showScreen(state){
   document.getElementById('game-over-screen').style.display = (state === GAME_STATES.GAME_OVER) ? 'block' : 'none';
 }
 
-function handleStrike(){
+function addStrike(){
   ++strikes;
+  updateScoreboard();
   if(strikes >= 3){
     document.getElementById('final-score').textContent = score;
     endGame();
+  }
+}
+
+function updateStrikeBoxes(){
+  for(let i = 1; i <=3; ++i){
+    const box = document.getElementById(`strike-box-${i}`);
+    box.textContent = i <= strikes ? 'X' : '';
   }
 }
 
@@ -406,7 +416,10 @@ function startGame(){
   startRound();
 }
 
-function endGame(){
+async function endGame(){
   document.getElementById('final-score').textContent = score;
-  showScreen(GAME_STATES.GAME_OVER);
+  sleep(1000).then(() => {
+    showScreen(GAME_STATES.GAME_OVER);
+    stopTimer();
+  }); 
 }

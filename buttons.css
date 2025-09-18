@@ -1,0 +1,49 @@
+button {
+    padding: 14px 22px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+button:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+/* Dropdown menu styles */
+select{
+    padding: 12px 18px;
+    font-size: 1.1rem;
+    border-radius: 10 px;
+    border: none;
+    cursor: pointer;
+    background-color: #bbbbbb;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.09); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    min-width: 200px; /* Only relevant for chapter dropdown */
+}
+
+select:hover {
+    background-color: #5f5f5f; /* Slightly darker on hover */
+}
+
+#chapter-select {
+  margin-bottom: 40px; /* give space for dropdown expansion */
+}
+
+/* 
+ select:focus {
+  outline: none;
+  background-color: #dee2e6;
+  }
+*/

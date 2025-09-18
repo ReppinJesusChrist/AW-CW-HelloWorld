@@ -23,3 +23,7 @@ export function makeScriptureLink(book, chapter, startVerse, endVerse){
 
     return `https://www.churchofjesuschrist.org/study/scriptures/bofm/${bookId}/${chapter}?lang=eng&verse=${versePart}#p${startVerse}`;
 }
+
+export function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
