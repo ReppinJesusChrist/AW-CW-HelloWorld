@@ -13,14 +13,7 @@
     <div id="menu-screen">
         <h1>Book of Mormon Baseball!!!</h1>
         <button class="start-restart-button" id="start-button">Start Game</button>
-        <div id="difficulty-selection">
-            <label for="difficulty-dropdown-label">Select Difficulty:</label>
-            <select id="difficulty-value">
-                <option value="easy">Easy (30s)</option>
-                <option value="medium">Medium (20s)</option>
-                <option value="hard">Hard (10s)</option>
-            </select>
-        </div>
+        <button id="settings-button">Settings</button>
     </div>
     <div id="game-screen" style="display:none;">
         <h1>Book of Mormon Baseball!!!</h1>
@@ -59,7 +52,7 @@
                     <div id="strikes-display">Strikes: <span id="strikes">__</span></div>
                 </div>
                 <button class="start-restart-button" id="restart-button">Restart Game</button>
-                <button id="main-menu-button">Main Menu</button>
+                <button class="main-menu-button">Main Menu</button>
             </div>
         <div id="right-panel">
           <div id="diamond">
@@ -81,8 +74,32 @@
         <p>Your final score is: <span id="final-score">__</span></p>
         <button class="start-restart-button" id="try-again-button">Restart Game</button>
     </div>
-    
-
+    <div id="settings-screen" style="display:none;">
+        <h2>Settings</h2>
+        <div id="settings-book-volume-selection">
+            <label for="volume-select-dropdown-label">Select Volume:</label>
+            <select id="volume-select-value">
+                <option value="ot">Old Testament</option>
+                <option value="nt">New Testament</option>
+                <option value="bom" selected>Book of Mormon</option>
+                <option value="dc">Doctrine and Covenants</option>
+                <option value="gc">General Conference (only most recent)</option>
+            </select>
+            <label for="include-exclude-dropdown-label">Select Books/Subsections to include</label>
+            <select id="include-exclude-values" class="checkbox-multiselect" multiple>
+                <!-- Options will be populated dynamically based on selected volume -->
+            </select>
+        </div>
+        <div id="difficulty-selection">
+            <label for="difficulty-dropdown-label">Select Difficulty:</label>
+            <select id="difficulty-value">
+                <option value="easy">Easy (30s)</option>
+                <option value="medium">Medium (20s)</option>
+                <option value="hard">Hard (10s)</option>
+            </select>
+        </div>
+        <button class="main-menu-button">Back to Menu</button>
+    </div>
     <script type="module" src="BOMB.js"></script>
 </body>
 

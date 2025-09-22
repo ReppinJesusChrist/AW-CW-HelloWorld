@@ -7,13 +7,15 @@
 - [X] Make the countdown bar fancier
   - [X] Change color toward red as it counts down
   - [X] Flash for urgent ending
-- [ ] Allow book exclusion
+- [X] Allow book exclusion
+  - [X] Create SETTINGS screen
 - [ ] Other Books 
-  - [ ] Selection Menu
-  - [ ] GenCon
+  - [X] Create Files for NT and DC
+  - [X] Selection Menu
+    - [X] UI
+    - [X] Make it work
+  - [ ] Create File for latest GenCon
 - [X] Show score on Game Over screen
-- [ ] Make main menu cleaner and bigger
-- [ ] Same ^^^ with Game Over screen
 - [X] Disable timer with Main Menu button
 - [X] Insert hyperlink on reference reveal to allow going to churchofjesuschrist.org to view the chapter and see context
 - [ ] Match reveal text ( [ ] & Other status text) to button text size
@@ -24,3 +26,13 @@
 - [ ] Flash text on screen (not an alert) when a strike is hit ("Strike 1!" etc.)
 - [ ] Sort the functions in BOMB.js to make it easier to seek through. Maybe refactor out some other .js files
 - [ ] Add BOM styling to all elements (Background texture & color, gold letters, font, etc.)
+- [ ] Disable new round button until a guess has been made
+- [ ] Make main menu cleaner and bigger
+- [ ] Same ^^^ with Game Over screen
+- [ ] Clean up console.log clutter
+- [ ] Clean up formatting on Settings screen
+- [ ] Add 'No Time Limit' Option
+- [ ] UI Improvements
+  - [ ] Settings Screen
+    - [ ] Add spacing between elements
+    - [ ] Fix Checkbox menu to make it dropdown instead of always being big

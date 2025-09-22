@@ -14,13 +14,16 @@ const TIMER_DURATIONS = {
 
 const STANDARD_WORKS_FILE_NAMES = {
   bom: 'data/bom.json',
-  ot: 'data/o_test.json',
+  ot: 'data/ot.json',
+  nt: 'data/nt.json',
+  dc: 'data/dc.json',
 };
 
 const GAME_STATES = {
   MENU: 'menu',
   IN_GAME: 'in_game',
-  GAME_OVER: 'game_over'
+  GAME_OVER: 'game_over',
+  SETTINGS: 'settings'
 }
 
 import { startTimer, stopTimer } from "./timer.js";
@@ -38,6 +41,8 @@ let strikes = 0;
 let round = 0;
 let gameState = GAME_STATES.MENU;
 let difficulty = 'easy'; // Default difficulty
+let includedBooks = new Set(); // Books to include in selection
+let currentVolume = 'bom'; // Default volume
 
 const basePositions = {
   home:  { left: 50,  top: 90 },
@@ -51,18 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // Set CSS variables for animation time
   document.documentElement.style.setProperty('--runner-animation-time', `${ANIMATION_TIME_MS}ms`);
 
-  // Load verses from bom.json when the page loads
   positionBases();
+
+  // Load verses from bom.json when the page loads
+  fetchScriptures();
   
-  fetch(`${STANDARD_WORKS_FILE_NAMES.bom}`)
-    .then(response => response.json())
-    .then(data => {
-      scriptures = data;
-      buildVerseList(scriptures);
-      buildChapterIndex(scriptures);
-      populateGuessOptions();
-    })
-    .catch(err => console.error('Error loading verses:', err));
+
+  document.getElementById('volume-select-value').addEventListener('change', function () {
+    populateIncludeExcludeOptions();
+  });
 
   document.getElementById('revealDistance').addEventListener('click', function () {
     const refEl = document.getElementById('distance');
@@ -99,29 +101,47 @@ document.addEventListener('DOMContentLoaded', function () {
     stopTimer();
   });
 
-});
+  document.getElementById('settings-button').addEventListener('click', function () {
+    showScreen(GAME_STATES.SETTINGS);
+  });
 
-document.querySelectorAll('.start-restart-button').forEach(button => {
-  button.addEventListener('click', function () {
-    if(button.id === 'start-button'){
-      let difEl = document.getElementById('difficulty-value');
-      difficulty = difEl.value;
-      console.log(`Difficulty: ${difficulty}; Timer: ${TIMER_DURATIONS[difficulty]}s`);
-    }
-    startGame();
+  document.querySelectorAll('.main-menu-button').forEach(button => {
+    button.addEventListener('click', function () {
+      showScreen(GAME_STATES.MENU);
+      stopTimer();
+      // Reset game state. Eventually move to new resetGame() function
+      strikes = 0;
+    });
+  });
+
+  document.querySelectorAll('.start-restart-button').forEach(button => {
+    button.addEventListener('click', function () {
+      if(button.id === 'start-button'){
+        let difEl = document.getElementById('difficulty-value');
+        difficulty = difEl.value;
+        console.log(`Difficulty: ${difficulty}; Timer: ${TIMER_DURATIONS[difficulty]}s`);
+      }
+      startGame();
+    });
   });
 });
 
-document.getElementById('main-menu-button').addEventListener('click', function () {
-  showScreen(GAME_STATES.MENU);
-  stopTimer();
-  // Reset game state
-  strikes = 0;
-  console.log("Returning to menu");
-});
+function fetchScriptures() {
+  fetch(`${STANDARD_WORKS_FILE_NAMES[currentVolume]}`)
+    .then(response => response.json())
+    .then(data => {
+      scriptures = data;
+      buildVerseList(scriptures);
+      buildChapterIndex(scriptures);
+      populateGuessOptions();
+      populateIncludeExcludeOptions();
+    })
+    .catch(err => console.error('Error loading verses:', err));
+}
 
 function populateGuessOptions() {
   const bookSelect = document.getElementById('bookSelect');
+  bookSelect.innerHTML = ''; // Clear previous options
   const chapterSelect = document.getElementById('chapterSelect');
 
   // Fill book options
@@ -150,6 +170,51 @@ function populateGuessOptions() {
   });
 }
 
+function populateIncludeExcludeOptions() {
+  const vSelect = document.getElementById('volume-select-value');
+  const IESelect = document.getElementById('include-exclude-values');
+  IESelect.innerHTML = ''; // Clear previous options
+
+    Object.keys(scriptures).forEach(bookName => {
+      const wrapper = document.createElement('div');
+
+      const option = document.createElement('input');
+      option.type = 'checkbox';
+      option.id = `inex-${bookName}`;
+      option.value = bookName;
+      option.textContent = bookName;
+
+      option.checked = true; // Default to include all books
+      includedBooks.add(bookName); // Update set to reflect ^^^
+
+      option.addEventListener('change', () => {
+        if(option.checked){
+          includedBooks.add(bookName);
+        } else {
+          includedBooks.delete(bookName);
+        }
+        console.log(`Included books:`, includedBooks);
+      });
+
+      const label = document.createElement('label');
+      label.setAttribute('for', `inex-${bookName}`);
+      label.textContent = bookName;
+
+      wrapper.appendChild(option);
+      wrapper.appendChild(label);
+
+
+      IESelect.appendChild(wrapper);
+    });
+  vSelect.addEventListener('change', () =>{
+    currentVolume = vSelect.value;
+    fetchScriptures();
+    populateIncludeExcludeOptions();
+  });
+}
+
+
+
 function getRandomVerses() {
   const maxStartIndex = allVerses.length - NUM_VERSES;
   const startIndex = Math.floor(Math.random() * (maxStartIndex + 1));
@@ -158,7 +223,9 @@ function getRandomVerses() {
 
   const firstVerse = selectedVerses[0];
   const lastVerse = selectedVerses[selectedVerses.length - 1];
-  if (firstVerse.book !== lastVerse.book || firstVerse.chapter !== lastVerse.chapter) {
+  if (firstVerse.book !== lastVerse.book || 
+    firstVerse.chapter !== lastVerse.chapter ||
+    !includedBooks.has(firstVerse.book)) {
     return getRandomVerses(); // Try again recursively if spanning multiple chapters or books
   }
 
@@ -206,6 +273,7 @@ function showVerses() {
 
 function  buildChapterIndex(scriptures) {
   let index = 0;
+  chapterIndexMap = {};
   for (const book in scriptures) {
     for (const chapter in scriptures[book]) {
       const key = `${book} ${chapter}`;
@@ -389,6 +457,7 @@ function showScreen(state){
   document.getElementById('menu-screen').style.display = (state === GAME_STATES.MENU) ? 'block' : 'none';
   document.getElementById('game-screen').style.display = (state === GAME_STATES.IN_GAME) ? 'block' : 'none';
   document.getElementById('game-over-screen').style.display = (state === GAME_STATES.GAME_OVER) ? 'block' : 'none';
+  document.getElementById('settings-screen').style.display = (state === GAME_STATES.SETTINGS) ? 'block' : 'none';
 }
 
 function addStrike(){

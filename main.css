@@ -8,13 +8,11 @@
     z-index: 1;
 }
 
-
 h1 {
     text-align: center;
     font-size: 2.5rem;
     margin-top: 20px;
 }
-
 
 #scoreboard {
     text-align: center;
@@ -98,4 +96,9 @@ h1 {
 
 #timer-container.warning-flash {
     animation: flash-red 1s ease-in-out infinite;
+}
+
+#menu-screen, #game-over-screen, #settings-screen {
+    text-align: center;
+    padding: 20px;
 }
