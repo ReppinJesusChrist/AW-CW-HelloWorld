@@ -13,10 +13,11 @@ const TIMER_DURATIONS = {
 }; // Timer durations for different difficulties
 
 const STANDARD_WORKS_FILE_NAMES = {
-  bom: 'data/bom.json',
+  bofm: 'data/bofm.json',
   ot: 'data/ot.json',
   nt: 'data/nt.json',
   dc: 'data/dc.json',
+  gc: 'data/gc.json'
 };
 
 const GAME_STATES = {
@@ -42,7 +43,7 @@ let round = 0;
 let gameState = GAME_STATES.MENU;
 let difficulty = 'easy'; // Default difficulty
 let includedBooks = new Set(); // Books to include in selection
-let currentVolume = 'bom'; // Default volume
+let currentVolume = 'bofm'; // Default volume
 
 const basePositions = {
   home:  { left: 50,  top: 90 },
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // SIMPLE REVEAL: just show once
     if (!refEl.textContent && currentSelection) {
       let cs = currentSelection;
-      const url = makeScriptureLink(cs.book, cs.chapter, cs.verses[0].verse, cs.verses[cs.verses.length - 1].verse);
+      const url = makeScriptureLink(currentVolume, cs);
       const link = document.createElement('a');
       link.href = url;
       link.target = "_blank";

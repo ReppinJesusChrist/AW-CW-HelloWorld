@@ -14,7 +14,8 @@
   - [X] Selection Menu
     - [X] UI
     - [X] Make it work
-  - [ ] Create File for latest GenCon
+  - [X] Create File for latest GenCon
+  - [X] ONLY latest GenCon
 - [X] Show score on Game Over screen
 - [X] Disable timer with Main Menu button
 - [X] Insert hyperlink on reference reveal to allow going to churchofjesuschrist.org to view the chapter and see context
@@ -36,3 +37,4 @@
   - [ ] Settings Screen
     - [ ] Add spacing between elements
     - [ ] Fix Checkbox menu to make it dropdown instead of always being big
+    - [ ] Add 'check all' and 'uncheck all' option for chapter exclusion selection

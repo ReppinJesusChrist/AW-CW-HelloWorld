@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputFile = path.join(__dirname, "../data/dc_only.json");
-const outputFile = path.join(__dirname, "../data/dc.json");
+const inputFile = path.join(__dirname, "../data/gc_last_4.json");
+const outputFile = path.join(__dirname, "../data/gc.json");
 
 try{
     const raw = fs.readFileSync(inputFile, 'utf8');
@@ -11,16 +11,17 @@ try{
     const structuredData = {};
 
     data.forEach(entry => {
-        const book = entry.book_title;
-        const chapter = entry.chapter_number;
-        const verse = entry.verse_number;
+        const session = `${entry.season} ${entry.year}`;
+        const speaker = entry.speaker.split(" ").slice(1).join(" ");
 
-        if(!structuredData[book]) structuredData[book] = {};
-        if(!structuredData[book][chapter]) structuredData[book][chapter] = [];
-
-        structuredData[book][chapter].push({
-            verse: verse,
-            text: entry.scripture_text
+        if(!structuredData[session]) structuredData[session] = {};
+        if(!structuredData[session][speaker]) structuredData[session][speaker] = [];
+        
+        entry.text.forEach((para, idx) => {
+            structuredData[session][speaker].push({
+                verse: idx + 1,
+                text: para
+            });
         });
     });
 
