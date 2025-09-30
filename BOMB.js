@@ -32,6 +32,11 @@ const GAME_STATES = {
   SETTINGS: 'settings'
 }
 
+const vSelect = document.getElementById('volume-select-value');
+const toggle = document.getElementById('include-exclude-toggle');
+const IESelect = document.getElementById('include-exclude-values');
+const dropdown = document.getElementById('include-exclude-dropdown');
+
 import { startTimer, stopTimer } from "./timer.js";
 import { makeScriptureLink, sleep } from "./helper_functions.js";
 
@@ -107,6 +112,18 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('newRound').addEventListener('click', function () {
     startRound();
   });
+
+  toggle.addEventListener('click', (e)=>{
+    e.stopPropagation(); // Study this further to understand
+    dropdown.classList.toggle('open');
+  })
+
+  /**
+   // Close dropdown if clicked outside
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+    });
+  */
 
   document.getElementById('finalizeGuess').addEventListener('click', function () {
     submitGuess();
@@ -195,22 +212,7 @@ function populateGuessOptions() {
 }
 
 function populateIncludeExcludeOptions() {
-  const vSelect = document.getElementById('volume-select-value');
-  const toggle = document.getElementById('include-exclude-toggle');
-  const IESelect = document.getElementById('include-exclude-values');
-  const dropdown = document.getElementById('include-exclude-dropdown');
   IESelect.innerHTML = ''; // Clear previous options
-
-  toggle.addEventListener('click', (e)=>{
-    e.stopPropagation(); // Study this further to understand
-    dropdown.classList.toggle('open');
-  })
-
-  // Close dropdown if clicked outside
-  document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
-  });
-
     Object.keys(scriptures).forEach(bookName => {
       const wrapper = document.createElement('div');
       wrapper.style.display = 'block';

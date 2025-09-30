@@ -1,13 +1,9 @@
-.settings-screen {
-
-}
-
 .dropdown-content {
     display : none;
     position: absolute;
     background: white;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 0px;
     padding: 8px;
     margin-top: 4px;
     width: 100%;
@@ -28,12 +24,14 @@
 }
 
 #include-exclude-toggle {
-    width: 100%;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 8px;
+    padding: 12px 18px;
+    font-size: 1.1rem;
+    border-radius: 0 px;
+    border: none;
     cursor: pointer;
-    text-align: left;
-    color: black;
+    background-color: #bbbbbb;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.09); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    min-width: 200px; /* Only relevant for chapter dropdown */
 }
