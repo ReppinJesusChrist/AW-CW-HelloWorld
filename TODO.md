@@ -21,24 +21,29 @@
 - [X] Insert hyperlink on reference reveal to allow going to churchofjesuschrist.org to view the chapter and see context
 - [O] Use faces of prophets as players (Is this legal? NO.)
 - [X] Fix "Strikes: text" bug
-- [ ] Add Main Menu button to game over screen
+- [X] Add Main Menu button to game over screen
 - [ ] Implement a leaderboard
 - [ ] Flash text on screen (not an alert) when a strike is hit ("Strike 1!" etc.)
 - [ ] Sort the functions in BOMB.js to make it easier to seek through. Maybe refactor out some other .js files
 - [ ] Add BOM styling to all elements (Background texture & color, gold letters, font, etc.)
 - [ ] Disable new round button until a guess has been made
-- [ ] Make main menu cleaner and bigger
-- [ ] Same ^^^ with Game Over screen
 - [ ] Clean up console.log clutter
-- [ ] Clean up formatting on Settings screen
-- [ ] Add 'No Time Limit' Option
-  - [ ] Also Other timing options
+- [X] Add 'No Time Limit' Option
+  - [X] Also Other timing options
 - [ ] Add button to game-over screen that allows viewing the game screen to see how close the player was, etc. without the option to keep playing
 - [ ] Allow for adjusting thresholds in settings as well
 - [ ] UI Improvements
   - [ ] Settings Screen
     - [ ] Add spacing between elements
+    - [ ] Add multiple tabs for space management
     - [ ] Fix Checkbox menu to make it dropdown instead of always being big
-    - [ ] Add 'check all' and 'uncheck all' option for chapter exclusion selection
+    - [X] Add 'check all' and 'uncheck all' option for chapter exclusion selection
   - [ ] Game Screen
-    - [ ]
+    - [ ] Set fixed size verse display with auto-scrolling as needed
+- [ ] Refactoring
+  - [ ] HTML
+    - [ ] 
+  - [ ] JS
+    - [ ] 
+  - [ ] CSS
+    - [ ] 

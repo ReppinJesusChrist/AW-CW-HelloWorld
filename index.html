@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="buttons.css" />
     <link rel="stylesheet" href="right_column.css" />
+    <link rel="stylesheet" href="settings.css" />
 </head>
 
 <body>
@@ -87,9 +88,11 @@
                 <option value="gc">General Conference (2024 and later)</option>
             </select>
             <label for="include-exclude-dropdown-label">Select Books/Subsections to include</label>
-            <select id="include-exclude-values" class="checkbox-multiselect" multiple>
+            <div id="include-exclude-dropdown" class="custom-dropdown">
+                <button type="button" id="include-exclude-toggle">Click for book options</button>
+                <div id="include-exclude-values" class="dropdown-content"></div>
                 <!-- Options will be populated dynamically based on selected volume -->
-            </select>
+            </div>
             <button id="check-all-inex">Select All</button>
             <button id="uncheck-all-inex">Deselect All</button>
         </div>

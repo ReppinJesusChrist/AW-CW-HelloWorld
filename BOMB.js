@@ -1,10 +1,3 @@
-const NUM_VERSES = 5;
-
-const homeRunThreshold = 2; // Number of chapters away for a "home run"
-const tripleThreshold = 4; // Number of chapters away for a "triple"
-const doubleThreshold = 8; // Number of chapters away for a "double"  
-const singleThreshold = 16; // Number of chapters away for a "single"
-
 const ANIMATION_TIME_MS = 600; // Time in ms for runner animation
 const TIMER_DURATIONS = {
   unlimited: Infinity,
@@ -57,6 +50,7 @@ let difficulty = 'easy'; // Default difficulty
 let includedBooks = new Set(); // Books to include in selection
 let currentVolume = 'bofm'; // Default volume
 let thresholdSetting = 'average';
+let numDisplayVerses = 5;
 
 const basePositions = {
   home:  { left: 50,  top: 90 },
@@ -202,23 +196,39 @@ function populateGuessOptions() {
 
 function populateIncludeExcludeOptions() {
   const vSelect = document.getElementById('volume-select-value');
+  const toggle = document.getElementById('include-exclude-toggle');
   const IESelect = document.getElementById('include-exclude-values');
+  const dropdown = document.getElementById('include-exclude-dropdown');
   IESelect.innerHTML = ''; // Clear previous options
+
+  toggle.addEventListener('click', (e)=>{
+    e.stopPropagation(); // Study this further to understand
+    dropdown.classList.toggle('open');
+  })
+
+  // Close dropdown if clicked outside
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+  });
 
     Object.keys(scriptures).forEach(bookName => {
       const wrapper = document.createElement('div');
+      wrapper.style.display = 'block';
 
-      const option = document.createElement('input');
-      option.type = 'checkbox';
-      option.id = `inex-${bookName}`;
-      option.value = bookName;
-      option.textContent = bookName;
-
-      option.checked = true; // Default to include all books
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = `inex-${bookName}`;
+      checkbox.value = bookName;
+      checkbox.textContent = bookName;
+      checkbox.checked = true; // Default to include all books
       includedBooks.add(bookName); // Update set to reflect ^^^
 
-      option.addEventListener('change', () => {
-        if(option.checked){
+      const label = document.createElement('label');
+      label.setAttribute('for', `inex-${bookName}`);
+      label.textContent = bookName;
+
+      checkbox.addEventListener('change', () => {
+        if(checkbox.checked){
           includedBooks.add(bookName);
         } else {
           includedBooks.delete(bookName);
@@ -226,16 +236,12 @@ function populateIncludeExcludeOptions() {
         console.log(`Included books:`, includedBooks);
       });
 
-      const label = document.createElement('label');
-      label.setAttribute('for', `inex-${bookName}`);
-      label.textContent = bookName;
-
-      wrapper.appendChild(option);
+      wrapper.appendChild(checkbox);
       wrapper.appendChild(label);
-
-
       IESelect.appendChild(wrapper);
     });
+
+
   vSelect.addEventListener('change', () =>{
     currentVolume = vSelect.value;
     fetchScriptures();
@@ -258,10 +264,10 @@ function toggleAllBoxes(targetDiv, check){
 }
 
 function getRandomVerses() {
-  const maxStartIndex = allVerses.length - NUM_VERSES;
+  const maxStartIndex = allVerses.length - numDisplayVerses;
   const startIndex = Math.floor(Math.random() * (maxStartIndex + 1));
 
-  const selectedVerses = allVerses.slice(startIndex, startIndex + NUM_VERSES);
+  const selectedVerses = allVerses.slice(startIndex, startIndex + numDisplayVerses);
 
   const firstVerse = selectedVerses[0];
   const lastVerse = selectedVerses[selectedVerses.length - 1];

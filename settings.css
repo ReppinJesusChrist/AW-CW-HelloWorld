@@ -1,0 +1,39 @@
+.settings-screen {
+
+}
+
+.dropdown-content {
+    display : none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 4px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.custom-dropdown.open .dropdown-content {
+    display: block;
+}
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: fit-content;
+}
+
+#include-exclude-toggle {
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    text-align: left;
+    color: black;
+}
