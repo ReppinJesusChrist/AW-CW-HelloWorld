@@ -9,7 +9,7 @@
   - [X] Flash for urgent ending
 - [X] Allow book exclusion
   - [X] Create SETTINGS screen
-- [ ] Other Books 
+- [X] Other Books 
   - [X] Create Files for NT and DC
   - [X] Selection Menu
     - [X] UI
@@ -19,8 +19,7 @@
 - [X] Show score on Game Over screen
 - [X] Disable timer with Main Menu button
 - [X] Insert hyperlink on reference reveal to allow going to churchofjesuschrist.org to view the chapter and see context
-- [ ] Match reveal text ( [ ] & Other status text) to button text size
-- [ ] Use faces of prophets as players (Is this legal?)
+- [O] Use faces of prophets as players (Is this legal? NO.)
 - [X] Fix "Strikes: text" bug
 - [ ] Add Main Menu button to game over screen
 - [ ] Implement a leaderboard
@@ -33,8 +32,13 @@
 - [ ] Clean up console.log clutter
 - [ ] Clean up formatting on Settings screen
 - [ ] Add 'No Time Limit' Option
+  - [ ] Also Other timing options
+- [ ] Add button to game-over screen that allows viewing the game screen to see how close the player was, etc. without the option to keep playing
+- [ ] Allow for adjusting thresholds in settings as well
 - [ ] UI Improvements
   - [ ] Settings Screen
     - [ ] Add spacing between elements
     - [ ] Fix Checkbox menu to make it dropdown instead of always being big
     - [ ] Add 'check all' and 'uncheck all' option for chapter exclusion selection
+  - [ ] Game Screen
+    - [ ]

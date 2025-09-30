@@ -73,6 +73,7 @@
         <h2>Game Over</h2>
         <p>Your final score is: <span id="final-score">__</span></p>
         <button class="start-restart-button" id="try-again-button">Restart Game</button>
+        <button class="main-menu-button">Back to Main Menu</button>
     </div>
     <div id="settings-screen" style="display:none;">
         <h2>Settings</h2>
@@ -89,13 +90,30 @@
             <select id="include-exclude-values" class="checkbox-multiselect" multiple>
                 <!-- Options will be populated dynamically based on selected volume -->
             </select>
+            <button id="check-all-inex">Select All</button>
+            <button id="uncheck-all-inex">Deselect All</button>
         </div>
         <div id="difficulty-selection">
             <label for="difficulty-dropdown-label">Select Difficulty:</label>
             <select id="difficulty-value">
-                <option value="easy">Easy (30s)</option>
+                <option value="unlimited">No Time Limit</option>
+                <option value="leisurely">Leisurely (3mins)</option>
+                <option value="relaxed">Relaxed (1min)</option>
+                <option value="easy" selected>Easy (30s)</option>
                 <option value="medium">Medium (20s)</option>
                 <option value="hard">Hard (10s)</option>
+            </select>
+        </div>
+        <div id="threshold-selection">
+            <label for="threshold-dropdown-label">Select Difficulty:</label>
+            <select id="threshold-value">
+                <option value="otest">Old Testament (Single: 250 chapters, Double: 100 chapters, Triple: 50 chapters, Hume Run: 25 chapters)</option>
+                <option value="barn">Hit the side of a barn (Single: 100 chapters, Double: 50 chapters, Triple: 25 chapters, Home Run: 12 chapters)</option>
+                <option value="wider">Hit the side of a barn (Single: 50 chapters, Double: 25 chapters, Triple: 12 chapters, Home Run: 7 chapters)</option>
+                <option value="wide">Hit the side of a barn (Single: 25 chapters, Double: 12 chapters, Triple: 7 chapters, Home Run: 4 chapters)</option>
+                <option value="average" selected>Hit the side of a barn (Single: 12 chapters, Double: 7 chapters, Triple: 4 chapters, Home Run: 2 chapters)</option>
+                <option value="narrow">Hit the side of a barn (Single: 7 chapters, Double: 4 chapters, Triple: 2 chapters, Home Run: 1 chapters)</option>
+                <option value="pinhead">Hit eye of a needle (Single: 4 chapters, Double: 2 chapters, Triple: 1 chapter, Home Run: Dead-on)</option>
             </select>
         </div>
         <button class="main-menu-button">Back to Menu</button>

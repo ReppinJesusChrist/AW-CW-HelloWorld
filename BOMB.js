@@ -1,16 +1,28 @@
 const NUM_VERSES = 5;
 
-const HOME_RUN_THRESHOLD = 2; // Number of chapters away for a "home run"
-const TRIPLE_THRESHOLD = 4; // Number of chapters away for a "triple"
-const DOUBLE_THRESHOLD = 8; // Number of chapters away for a "double"  
-const SINGLE_THRESHOLD = 16; // Number of chapters away for a "single"
+const homeRunThreshold = 2; // Number of chapters away for a "home run"
+const tripleThreshold = 4; // Number of chapters away for a "triple"
+const doubleThreshold = 8; // Number of chapters away for a "double"  
+const singleThreshold = 16; // Number of chapters away for a "single"
 
 const ANIMATION_TIME_MS = 600; // Time in ms for runner animation
 const TIMER_DURATIONS = {
+  unlimited: Infinity,
+  leisurely: 180,
+  relaxed: 60,
   easy: 30,
   medium: 20,
   hard: 10
 }; // Timer durations for different difficulties
+const THRESHOLD_ARRAYS = {
+  otest: [25, 50, 100, 250],
+  barn: [12, 25, 50, 100],
+  wider: [7, 12, 25, 50],
+  wide: [4, 7, 12, 25],
+  average: [2, 4, 7, 12],
+  narrow: [1, 2, 4, 7],
+  pinhead: [0, 1, 2, 4]
+}
 
 const STANDARD_WORKS_FILE_NAMES = {
   bofm: 'data/bofm.json',
@@ -44,6 +56,7 @@ let gameState = GAME_STATES.MENU;
 let difficulty = 'easy'; // Default difficulty
 let includedBooks = new Set(); // Books to include in selection
 let currentVolume = 'bofm'; // Default volume
+let thresholdSetting = 'average';
 
 const basePositions = {
   home:  { left: 50,  top: 90 },
@@ -65,6 +78,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('volume-select-value').addEventListener('change', function () {
     populateIncludeExcludeOptions();
+  });
+
+  document.getElementById('threshold-value').addEventListener('change', function() {
+    thresholdSetting = document.getElementById('threshold-value').value;
   });
 
   document.getElementById('revealDistance').addEventListener('click', function () {
@@ -104,6 +121,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('settings-button').addEventListener('click', function () {
     showScreen(GAME_STATES.SETTINGS);
+  });
+
+  document.getElementById('check-all-inex').addEventListener('click', function (){
+    let targetDiv = document.getElementById("include-exclude-values");
+    toggleAllBoxes(targetDiv, true);
+    populateIncludeExcludeOptions();
+  });
+
+  document.getElementById('uncheck-all-inex').addEventListener('click', function (){
+    let targetDiv = document.getElementById("include-exclude-values");
+    toggleAllBoxes(targetDiv, false);
+    includedBooks.clear();
   });
 
   document.querySelectorAll('.main-menu-button').forEach(button => {
@@ -214,7 +243,19 @@ function populateIncludeExcludeOptions() {
   });
 }
 
+/**
+ * 
+ * @param {HTMLElement} targetDiv - the element to iterate through 
+ * @param {boolean} check - true = check all boxes, false = uncheck all boxes 
+ */
+function toggleAllBoxes(targetDiv, check){
+  if(!targetDiv) return;
 
+  const checkboxes = targetDiv.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(box => {
+    box.checked = check;
+  });
+}
 
 function getRandomVerses() {
   const maxStartIndex = allVerses.length - NUM_VERSES;
@@ -420,21 +461,23 @@ function submitGuess() {
     const distance = Math.abs(guessIndex - answerIndex);
     currGuessDistance = distance;
 
-    advanceRunners(distance <= HOME_RUN_THRESHOLD ? 4 :
-                   distance <= TRIPLE_THRESHOLD ? 3 :
-                   distance <= DOUBLE_THRESHOLD ? 2 :
-                   distance <= SINGLE_THRESHOLD ? 1 : 0);
+    const [homeRunThreshold, tripleThreshold, doubleThreshold, singleThreshold] = THRESHOLD_ARRAYS[thresholdSetting];
+
+    advanceRunners(distance <= homeRunThreshold ? 4 :
+                   distance <= tripleThreshold ? 3 :
+                   distance <= doubleThreshold ? 2 :
+                   distance <= singleThreshold ? 1 : 0);
     updateBases();
-    if (distance <= HOME_RUN_THRESHOLD){
-      resultEl.textContent = `HOME RUN!!! (Within ${HOME_RUN_THRESHOLD} chapters).`;
-    } else if(distance <= TRIPLE_THRESHOLD){
-      resultEl.textContent = `TRIPLE! (Within ${TRIPLE_THRESHOLD} chapters).`;
-    } else if(distance <= DOUBLE_THRESHOLD){
-      resultEl.textContent = `Double! (Within ${DOUBLE_THRESHOLD} chapters). `;
-    } else if(distance <= SINGLE_THRESHOLD){
-      resultEl.textContent = `Single! (Within ${SINGLE_THRESHOLD} chapters). `;
+    if (distance <= homeRunThreshold){
+      resultEl.textContent = `HOME RUN!!! (Within ${homeRunThreshold} chapters).`;
+    } else if(distance <= tripleThreshold){
+      resultEl.textContent = `TRIPLE! (Within ${tripleThreshold} chapters).`;
+    } else if(distance <= doubleThreshold){
+      resultEl.textContent = `Double! (Within ${doubleThreshold} chapters). `;
+    } else if(distance <= singleThreshold){
+      resultEl.textContent = `Single! (Within ${singleThreshold} chapters). `;
     } else {
-      resultEl.textContent = `STRIKE! (Off by at least ${SINGLE_THRESHOLD + 1} chapters). `;
+      resultEl.textContent = `STRIKE! (Off by at least ${singleThreshold + 1} chapters). `;
       addStrike();
     }
 

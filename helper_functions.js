@@ -103,7 +103,7 @@ export function makeScriptureLink(volume, cs){
     } else if(volume === 'gc'){
         // https://www.churchofjesuschrist.org/study/general-conference/2025/04/13holland?lang=eng (Ideal link)
         // https://www.churchofjesuschrist.org/study/general-conference/2025/April/41holland?lang=eng (My current link generated)
-        return `https://www.churchofjesuschrist.org/study/general-conference/${formatSessionName(book).year}/${formatSessionName(book).monthNum}/41holland?lang=eng`
+        return `https://www.churchofjesuschrist.org/study/general-conference/${formatSessionName(book).year}/${formatSessionName(book).monthNum}?lang=eng`
     }
     
 }
